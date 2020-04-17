@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const secret = require('../config/secrets.js');
 const db = require('../models/users.js');
 
-
+//register a new user
 router.post('/register', (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 8);
