@@ -40,8 +40,9 @@ router.post('/register', (req, res) => {
     })
 
 })
+
 //have to sign in with email and password
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
     let user = req.body;
 
     if (!req.body.email || !req.body.password){
@@ -59,6 +60,30 @@ router.post('/login', (req, res) => {
                     email: user.email,
                     token: token
             })
+    })
+    .catch(err => {
+        res.status(500).json({ message: "Internal Server Error"})
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+
+    db
+    .remove(id)
+    .then(result => {
+        res.status(200)
+    })
+    .catch(err => {
+        res.status(500).json({ message: "Internal Server Error"})
+    })
+})
+
+router.get('/all', (req, res) => {
+    db
+    .findAll()
+    .then(result => {
+        res.status(200).json(result)
     })
     .catch(err => {
         res.status(500).json({ message: "Internal Server Error"})
