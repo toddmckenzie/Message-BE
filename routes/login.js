@@ -32,15 +32,13 @@ router.post('/register', (req, res) => {
             console.log(err)
             res.status(500).json({ message: "Internal server error after adding user"})
         })
-    .catch(err => {
-        res.status(500).json({ message: "Internal server error before adding user."})
-    })
         
 
     })
     .catch(err => {
-
+        res.status(500).json({ message: "Internal server error before adding user."})
     })
+
 })
 
 const generateToken = (user) => {
