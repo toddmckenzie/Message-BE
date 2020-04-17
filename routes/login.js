@@ -43,7 +43,6 @@ router.post('/register', (req, res) => {
 
 //have to sign in with email and password
 router.post('/', (req, res) => {
-    let user = req.body;
 
     if (!req.body.email || !req.body.password){
         res.status(400).json({ message: "Must have email and password"})
@@ -52,7 +51,7 @@ router.post('/', (req, res) => {
     db
     .find(req.body.email)
     .then(user => {
-        if (user && bcrypt.compareSync(password, user.password)) {
+        if (user && bcrypt.compareSync(req.body.password, user.password)) {
             const token = generateToken(user)
             res.status(200).json({
                     id: user.id,
@@ -63,6 +62,7 @@ router.post('/', (req, res) => {
         }
     })
     .catch(err => {
+        console.log(err)
         res.status(500).json({ message: "Internal Server Error"})
     })
 })
