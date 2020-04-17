@@ -17,7 +17,7 @@ router.post('/register', (req, res) => {
     db
     .add(user)
     .then(result => {
-        db.findUser(user.email)
+        db.find(user.email)
         .then(user => {
             const token = generateToken(user)
             res.status(200).json({
@@ -40,11 +40,35 @@ router.post('/register', (req, res) => {
     })
 
 })
+//have to sign in with email and password
+router.post('/login', (req, res) => {
+    let user = req.body;
+
+    if (!req.body.email || !req.body.password){
+        res.status(400).json({ message: "Must have email and password"})
+    }
+
+    db
+    .find(req.body.email)
+    .then(user => {
+        if (user && bcrypt.compareSync(password, user.password)) {
+            const token = generateToken(user)
+            res.status(200).json({
+                    id: user.id,
+                    username: user.username,
+                    email: user.email,
+                    token: token
+            })
+    })
+    .catch(err => {
+        res.status(500).json({ message: "Internal Server Error"})
+    })
+})
 
 const generateToken = (user) => {
     const payload = {
         id: user.id,
-        username: user.username
+        email: user.email
     }
     const options = {
         expiresIn: '24h'
