@@ -8,14 +8,14 @@ module.exports = {
 }
 
 function find(email){
-    return db('users').where({ email }).first()
+    return db('users').where({email}).first()
 }
 
 function add(user){
     return db('users').insert(user)
 }
-function remove(email) {
-    return db('users').where({ email }).del();
+function remove(id) {
+    return db('users').where({ id }).del();
 }
 
 function findAll() {
