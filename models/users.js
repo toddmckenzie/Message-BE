@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function find(email){
-    return db('users').where({email}).first()
+    return db('users').where({ email }).first()
 }
 
 function add(user){
