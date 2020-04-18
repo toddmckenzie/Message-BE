@@ -35,7 +35,7 @@ router.delete('/:id', (req, res) => {
         res.status(500).json({ message: "Internal Server Error"})
     })
 })
-
+//need channel id to receieve all of channels ids/
 router.get('/:id', (req, res) => {
     const id = req.params.id;
 

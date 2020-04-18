@@ -15,5 +15,5 @@ function remove(id){
 }
 
 function getChannelMessages(id){
-    return db('messages').where({ id });
+    return db('messages').where({ channel_id: id });
 }
