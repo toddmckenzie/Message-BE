@@ -2,7 +2,8 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
     add, 
-    remove
+    remove,
+    getChannelMessages
 }
 
 function add(message){
@@ -13,3 +14,6 @@ function remove(id){
     return db('messages').where({ id }).del();
 }
 
+function getChannelMessages(id){
+    return db('messages').where({ id });
+}
