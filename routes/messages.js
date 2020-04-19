@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const db = require('../models/messages.js');
 
-
+//post message to channel.
 router.post('/', (req, res) => {
     const message = req.body;
 
@@ -19,6 +19,7 @@ router.post('/', (req, res) => {
     })
 })
 
+//ability to delete message
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
 
