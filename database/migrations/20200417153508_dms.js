@@ -3,7 +3,8 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.string('dm').notNullable();
         tbl.integer('sender_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
-        tbl.integer('receiver_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+        tbl.integer('receiver_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
+        tbl.timestamp('posted_at').notNullable().defaultTo(knex.fn.now());
     })
 };
 
