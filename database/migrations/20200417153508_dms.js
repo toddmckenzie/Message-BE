@@ -1,8 +1,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable('dms', tbl => {
         tbl.increments();
-        tbl.integer('sender_user_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
-        tbl.integer('reciever_user_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
+        tbl.string('dm').notNullable();
+        tbl.integer('sender_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
     })
 };
 
