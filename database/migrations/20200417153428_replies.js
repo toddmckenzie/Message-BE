@@ -3,6 +3,7 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.integer('message_id').references('id').inTable('messages').onDelete('CASCADE')
         tbl.string('reply').notNullable();
+        tbl.timestamp('posted_at').notNullable().defaultTo(knex.fn.now());
     })
 };
 
