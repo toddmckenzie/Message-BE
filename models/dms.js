@@ -15,3 +15,7 @@ function add(message){
 function find(id){
     return db('dm_user').where({ user_id: id }).join('dms', 'user_id', '=', id)
 }
+
+function remove(id){
+    return db('dms').where({ id }).del();
+}
