@@ -3,7 +3,8 @@ const db = require('../database/dbConfig.js');
 module.exports = {
     add, 
     remove,
-    getAllReplies
+    getAllReplies,
+    update
 }
 
 
@@ -18,4 +19,8 @@ function remove(id){
 
 function getAllReplies(id){
     return db('replies').where({ message_id: id });
+}
+
+function update(id, reply){
+    return db('replies').where({ id }).update(reply)
 }

@@ -19,6 +19,20 @@ router.post('/', (req, res) => {
     })
 })
 
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const updatedReply = req.params.body;
+
+    db
+    .update(id, updatedReply)
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json({ message: "Internal Server Error"})
+    })
+})
+
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
